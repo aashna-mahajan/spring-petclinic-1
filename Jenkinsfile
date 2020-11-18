@@ -27,25 +27,6 @@ node {
         bat "copy ${workspace}\\target\\petclinic.war ${TOMCAT_HOME}\\webapps\\"
     }    
     stage('Application_Dynamic_Security_Testing') {
-        script {
-            sleep 60
-            try {
-                runZapCrawler(host: "http://localhost:${TOMCAT_PORT}/petclinic")
-            }
-            catch(err) {
-                echo "ERROR: ${err}"
-            }
-            finally {
-                try {
-                    runZapAttack()
-                }
-                catch(err){
-                    echo "ERROR: ${err}"
-                }
-                finally {
-                    archiveZap(failAllAlerts: 1, failHighAlerts: 0, failMediumAlerts: 0, failLowAlerts: 0, falsePositivesFilePath: "zapFalsePositives.json")
-                }
-            }
-        }
-    }
+        sh 'zap-cli zapHome: "${OWASP_ZAP_HOME}" port: "${OWASP_ZAP_PORT}" report -o ./ZAP_Report.html -f html'
+}
 }
