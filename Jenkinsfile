@@ -1,6 +1,6 @@
 node {
     def workspace = pwd()
-    def scannerHome
+    
     stage('Application_Build') {
         checkout scm
         bat './mvnw clean package -DskipTests'
@@ -15,12 +15,12 @@ node {
     }    
     stage('Application_Code_Analysis') {        
         withSonarQubeEnv {
-            bat 'C:/Softwares/JenkinsSoftwares/sonar-scanner/bin/sonar-scanner -Dsonar.organization=vishnukiranreddy -Dsonar.projectKey=vishnukiranreddy -Dsonar.projectName=Petclinic_Static_Code_Analysis'
+            bat './mvnw sonar:sonar -Dsonar.projectKey=Petclinic_Static_Code_Analysis -Dsonar.projectName=Petclinic_Static_Code_Analysis -PQP1'
         }
     }
     stage('Application_Static_Security_Testing') {        
-        withSonarQubeEnv("SonarCloud") {
-            bat 'C:/Softwares/JenkinsSoftwares/sonar-scanner/bin/sonar-scanner -Dsonar.organization=vishnukiran -Dsonar.projectKey=vishnukiran -Dsonar.projectName=Petclinic_SAST'
+        withSonarQubeEnv {
+            bat './mvnw sonar:sonar -Dsonar.projectKey=Petclinic_SAST -Dsonar.projectName=Petclinic_SAST -PQP2'
         }        
     }
     stage('Application_Deploy') {
