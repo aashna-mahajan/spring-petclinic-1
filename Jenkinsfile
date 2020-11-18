@@ -27,6 +27,7 @@ node {
         bat "copy ${workspace}\\target\\petclinic.war ${TOMCAT_HOME}\\webapps\\"
     }    
     stage('Application_Dynamic_Security_Testing') {
+        sh 'zap-cli --zap-path="${OWASP_ZAP_HOME}" --port=${OWASP_ZAP_PORT} quick-scan -s xss,sqli --spider -r http://localhost:8093/petclinic'
         sh 'zap-cli --zap-path="${OWASP_ZAP_HOME}" --port=${OWASP_ZAP_PORT} report -o ./ZAP_Report.html -f html'
 }
 }
