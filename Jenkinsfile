@@ -28,6 +28,7 @@ node {
     }    
     stage('Application_Dynamic_Security_Testing') {
         script {
+            sleep 60
             try {
                 startZap(host: "127.0.0.1", port: "${OWASP_ZAP_PORT}".toInteger(), timeout: 900, zapHome: "${OWASP_ZAP_HOME}")
                 sleep (time:45, unit:"SECONDS")
