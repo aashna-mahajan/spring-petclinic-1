@@ -19,8 +19,8 @@ node {
         }
     }
     stage('Application_Static_Security_Testing') {        
-        withSonarQubeEnv {
-            bat './mvnw sonar:sonar -Dsonar.projectKey=Petclinic_SAST -Dsonar.projectName=Petclinic_SAST -PQP2'
+        withSonarQubeEnv("SonarCloud") {
+            bat '${tool("SonarScanner")}/bin/sonar-scanner -Dsonar.projectKey=Petclinic_SAST -Dsonar.projectName=Petclinic_SAST -PQP2'
         }        
     }
     stage('Application_Deploy') {
