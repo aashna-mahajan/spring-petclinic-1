@@ -27,6 +27,6 @@ node {
         bat "copy ${workspace}\\target\\petclinic.war ${TOMCAT_HOME}\\webapps\\"
     }    
     stage('Application_Dynamic_Security_Testing') {
-        sh 'zap-cli zapHome: "${OWASP_ZAP_HOME}" port: "${OWASP_ZAP_PORT}" report -o ./ZAP_Report.html -f html'
+        sh 'zap-cli --zap-path="${OWASP_ZAP_PORT}" --port=${OWASP_ZAP_PORT} report -o ./ZAP_Report.html -f html'
 }
 }
