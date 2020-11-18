@@ -15,12 +15,12 @@ node {
     }    
     stage('Application_Code_Analysis') {        
         withSonarQubeEnv {
-            bat 'C:/Softwares/JenkinsSoftwares/sonar-scanner/bin/sonar-scanner -Dsonar.organization=vishnukiranreddy -Dsonar.projectKey=vishnukiranreddy -Dsonar.projectName=Petclinic_Static_Code_Analysis -PQP1'
+            bat 'C:/Softwares/JenkinsSoftwares/sonar-scanner/bin/sonar-scanner -Dsonar.organization=vishnukiranreddy -Dsonar.projectKey=vishnukiranreddy -Dsonar.projectName=Petclinic_Static_Code_Analysis'
         }
     }
     stage('Application_Static_Security_Testing') {        
         withSonarQubeEnv("SonarCloud") {
-            bat 'C:/Softwares/JenkinsSoftwares/sonar-scanner/bin/sonar-scanner -Dsonar.organization=vishnukiran -Dsonar.projectKey=vishnukiran -Dsonar.projectName=Petclinic_SAST -PQP2'
+            bat 'C:/Softwares/JenkinsSoftwares/sonar-scanner/bin/sonar-scanner -Dsonar.organization=vishnukiran -Dsonar.projectKey=vishnukiran -Dsonar.projectName=Petclinic_SAST'
         }        
     }
     stage('Application_Deploy') {
